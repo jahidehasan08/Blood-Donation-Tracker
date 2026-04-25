@@ -1,0 +1,42 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "User information related to blood donation eligibility.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "Full name of the donor" },
+        "bloodGroup": { "type": "string", "enum": ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"] },
+        "weight": { "type": "number", "description": "Weight in kg" },
+        "gender": { "type": "string", "enum": ["male", "female", "other"] },
+        "lastDonationDate": { "type": "string", "format": "date-time" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "bloodGroup", "createdAt"]
+    },
+    "Donation": {
+      "title": "Blood Donation Record",
+      "description": "Details of a single blood donation event.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "Reference to User ID" },
+        "date": { "type": "string", "format": "date-time", "description": "Date of donation" },
+        "hospital": { "type": "string", "description": "Name of the hospital or blood bank" },
+        "quantity": { "type": "number", "description": "Amount of blood in bags" },
+        "notes": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "date", "hospital", "quantity", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Stores user profile data."
+    },
+    "/donations/{donationId}": {
+      "schema": "Donation",
+      "description": "Stores blood donation history records."
+    }
+  }
+}
