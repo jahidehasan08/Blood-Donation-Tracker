@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Search, MapPin, Phone, ExternalLink, Building2, ChevronRight, Filter } from 'lucide-react';
+import { Search, MapPin, Phone, ExternalLink, Building2, ChevronRight, Filter, X, Copy, Check } from 'lucide-react';
 import { translations, Language } from '@/src/lib/translations';
 import { medicalData, divisions, getDistricts, getUpazilas } from '@/src/lib/medicalData';
 import { motion, AnimatePresence } from 'motion/react';
@@ -16,6 +16,8 @@ export function MedicalList({ lang }: MedicalListProps) {
   const [selectedUpazila, setSelectedUpazila] = useState('');
   const [selectedType, setSelectedType] = useState<string>('');
   const [showFilters, setShowFilters] = useState(false);
+  const [activeContact, setActiveContact] = useState<{name: string, phone: string} | null>(null);
+  const [copied, setCopied] = useState(false);
 
   const districts = useMemo(() => selectedDivision ? getDistricts(selectedDivision) : [], [selectedDivision]);
   const upazilas = useMemo(() => selectedDistrict ? getUpazilas(selectedDistrict) : [], [selectedDistrict]);
@@ -44,6 +46,12 @@ export function MedicalList({ lang }: MedicalListProps) {
     const isBloodBank = hospital.name.toLowerCase().includes('blood') || hospital.bnName.includes('ব্লাড');
     
     return { isDiagnostic, isClinic, isBloodBank };
+  };
+
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   return (
@@ -189,18 +197,27 @@ export function MedicalList({ lang }: MedicalListProps) {
                   </div>
 
                   <div className="grid grid-cols-2 gap-3">
-                    <ActionLink
-                      href={`tel:${hospital.contact}`}
-                      icon={<Phone className="w-5 h-5" />}
-                      label={t.contact}
-                      variant="slate"
-                    />
-                    <ActionLink
-                      href={hospital.location}
-                      icon={<ExternalLink className="w-5 h-5" />}
-                      label={t.location}
-                      variant="primary"
-                    />
+                    <button
+                      onClick={() => setActiveContact({ 
+                        name: lang === 'bn' ? hospital.bnName : hospital.name, 
+                        phone: hospital.contact 
+                      })}
+                      className="flex items-center justify-center gap-2.5 py-4 px-4 rounded-[1.25rem] transition-all duration-300 font-black text-xs uppercase tracking-widest shadow-sm hover:shadow-lg bg-slate-900 text-white hover:bg-slate-800"
+                    >
+                      <Phone className="w-5 h-5" />
+                      {t.contact}
+                    </button>
+                    <a
+                      href={hospital.location.includes('goo.gl/maps/') && hospital.location.length < 50 
+                        ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${lang === 'bn' ? hospital.bnName : hospital.name} ${hospital.district}`)}`
+                        : hospital.location}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-2.5 py-4 px-4 rounded-[1.25rem] transition-all duration-300 font-black text-xs uppercase tracking-widest shadow-sm hover:shadow-lg bg-red-600 text-white hover:bg-red-700 shadow-red-200"
+                    >
+                      <ExternalLink className="w-5 h-5" />
+                      {t.location}
+                    </a>
                   </div>
                 </div>
               </motion.div>
@@ -222,6 +239,60 @@ export function MedicalList({ lang }: MedicalListProps) {
           <p className="text-slate-300 mt-2 font-medium">Try adjusting your filters or search term</p>
         </motion.div>
       )}
+
+      {/* Contact Modal */}
+      <AnimatePresence>
+        {activeContact && (
+          <div 
+            onClick={() => setActiveContact(null)}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-slate-900/60 backdrop-blur-md"
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              onClick={(e) => e.stopPropagation()}
+              className="bg-white w-full max-w-sm rounded-[2.5rem] p-8 shadow-2xl relative overflow-hidden"
+            >
+              <div className="absolute top-0 right-0 w-24 h-24 bg-red-50 rounded-bl-full -z-0" />
+              
+              <button 
+                onClick={() => setActiveContact(null)}
+                className="absolute top-6 right-6 p-2 bg-white rounded-xl shadow-sm text-slate-400 hover:text-slate-600 transition-colors z-10"
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              <div className="relative z-10 text-center">
+                <div className="w-20 h-20 bg-red-100 text-red-600 rounded-3xl flex items-center justify-center mx-auto mb-6">
+                  <Phone className="w-10 h-10" />
+                </div>
+                
+                <h3 className="text-lg font-black text-slate-900 mb-2 px-4 italic">{activeContact.name}</h3>
+                <p className="text-2xl font-black text-red-600 tracking-wider mb-8">{activeContact.phone}</p>
+
+                <div className="grid grid-cols-2 gap-3">
+                  <button
+                    onClick={() => copyToClipboard(activeContact.phone)}
+                    className="flex items-center justify-center gap-2 py-4 bg-slate-50 text-slate-600 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-slate-100 transition-all"
+                  >
+                    {copied ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4" />}
+                    {copied ? (lang === 'bn' ? 'কপি হয়েছে' : 'Copied') : (lang === 'bn' ? 'কপি করুন' : 'Copy')}
+                  </button>
+                  <a
+                    href={`tel:${activeContact.phone}`}
+                    onClick={() => setActiveContact(null)}
+                    className="flex items-center justify-center gap-2 py-4 bg-red-600 text-white rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-red-700 shadow-lg shadow-red-600/20 transition-all"
+                  >
+                    <Phone className="w-4 h-4" />
+                    {lang === 'bn' ? 'কল দিন' : 'Call'}
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
@@ -253,23 +324,5 @@ function FilterSelect({ value, onChange, options, placeholder, disabled, isCusto
         <ChevronRight className="w-4 h-4 text-slate-400 rotate-90" />
       </div>
     </div>
-  );
-}
-
-function ActionLink({ href, icon, label, variant }: { href: string, icon: React.ReactNode, label: string, variant: 'primary' | 'slate' }) {
-  return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noreferrer"
-      className={`flex items-center justify-center gap-2.5 py-4 px-4 rounded-[1.25rem] transition-all duration-300 font-black text-xs uppercase tracking-widest shadow-sm hover:shadow-lg ${
-        variant === 'primary' 
-          ? 'bg-red-600 text-white hover:bg-red-700 shadow-red-200' 
-          : 'bg-slate-900 text-white hover:bg-slate-800'
-      }`}
-    >
-      {icon}
-      {label}
-    </a>
   );
 }

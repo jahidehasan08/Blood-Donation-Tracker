@@ -280,7 +280,7 @@ export const medicalData: Hospital[] = [
     district: "Rajshahi",
     upazila: "Rajpari",
     contact: "0721-776701",
-    location: "https://goo.gl/maps/BarindMed",
+    location: "https://www.google.com/maps/search/?api=1&query=Barind+Medical+College+Hospital+Rajshahi",
     type: "Private"
   },
   {
@@ -290,7 +290,7 @@ export const medicalData: Hospital[] = [
     district: "Rajshahi",
     upazila: "Laxmipur",
     contact: "09613-787811",
-    location: "https://goo.gl/maps/PopularRaj",
+    location: "https://www.google.com/maps/search/?api=1&query=Popular+Diagnostic+Center+Rajshahi",
     type: "Private"
   },
   {
@@ -300,7 +300,7 @@ export const medicalData: Hospital[] = [
     district: "Rajshahi",
     upazila: "Laxmipur",
     contact: "01766-661234",
-    location: "https://goo.gl/maps/LabAidRaj",
+    location: "https://www.google.com/maps/search/?api=1&query=LabAid+Diagnostic+Rajshahi",
     type: "Private"
   },
   {
@@ -310,7 +310,7 @@ export const medicalData: Hospital[] = [
     district: "Rajshahi",
     upazila: "Laxmipur",
     contact: "01766-663344",
-    location: "https://goo.gl/maps/IbnSinaRaj",
+    location: "https://www.google.com/maps/search/?api=1&query=Ibn+Sina+Diagnostic+Rajshahi",
     type: "Private"
   },
   {
@@ -320,7 +320,7 @@ export const medicalData: Hospital[] = [
     district: "Rajshahi",
     upazila: "Laxmipur",
     contact: "0721-771122",
-    location: "https://goo.gl/maps/ZamzamH",
+    location: "https://www.google.com/maps/search/?api=1&query=Zamzam+Hospital+Rajshahi",
     type: "Private"
   },
   {
@@ -330,7 +330,7 @@ export const medicalData: Hospital[] = [
     district: "Chapai Nawabganj",
     upazila: "Chapai Nawabganj Sadar",
     contact: "01711-123456",
-    location: "https://goo.gl/maps/ModernChapai",
+    location: "https://www.google.com/maps/search/?api=1&query=Modern+Medical+Center+Chapai+Nawabganj",
     type: "Private"
   },
   {
@@ -340,7 +340,7 @@ export const medicalData: Hospital[] = [
     district: "Chapai Nawabganj",
     upazila: "Chapai Nawabganj Sadar",
     contact: "01712-345678",
-    location: "https://goo.gl/maps/SademChapai",
+    location: "https://www.google.com/maps/search/?api=1&query=Sadem+Diagnostic+And+Hospital+Chapai+Nawabganj",
     type: "Private"
   },
   {
@@ -350,7 +350,7 @@ export const medicalData: Hospital[] = [
     district: "Chapai Nawabganj",
     upazila: "Chapai Nawabganj Sadar",
     contact: "01713-121212",
-    location: "https://goo.gl/maps/AlSunnahChapai",
+    location: "https://www.google.com/maps/search/?api=1&query=Al-Sunnah+Hospital+Chapai+Nawabganj",
     type: "Private"
   },
   {
@@ -360,7 +360,7 @@ export const medicalData: Hospital[] = [
     district: "Rajshahi",
     upazila: "Rajpari",
     contact: "0721-772150",
-    location: "https://goo.gl/maps/RajMed",
+    location: "https://www.google.com/maps/search/?api=1&query=Rajshahi+Medical+College+Hospital+Blood+Bank",
     type: "Govt"
   },
   {
@@ -370,7 +370,7 @@ export const medicalData: Hospital[] = [
     district: "Rajshahi",
     upazila: "Laxmipur",
     contact: "01711-404040",
-    location: "https://goo.gl/maps/GalaxyRaj",
+    location: "https://www.google.com/maps/search/?api=1&query=Galaxy+Diagnostic+And+Hospital+Rajshahi",
     type: "Private"
   },
   {
@@ -380,7 +380,7 @@ export const medicalData: Hospital[] = [
     district: "Rajshahi",
     upazila: "Laxmipur",
     contact: "01712-505050",
-    location: "https://goo.gl/maps/PrimeRaj",
+    location: "https://www.google.com/maps/search/?api=1&query=Prime+Diagnostic+Center+Rajshahi",
     type: "Private"
   },
   {
@@ -390,7 +390,7 @@ export const medicalData: Hospital[] = [
     district: "Rajshahi",
     upazila: "Rajpari",
     contact: "0721-774455",
-    location: "https://goo.gl/maps/MotherChildRaj",
+    location: "https://www.google.com/maps/search/?api=1&query=Mother+And+Child+Care+Center+Rajshahi",
     type: "Govt"
   },
   {
@@ -400,7 +400,7 @@ export const medicalData: Hospital[] = [
     district: "Chapai Nawabganj",
     upazila: "Chapai Nawabganj Sadar",
     contact: "0781-52416",
-    location: "https://goo.gl/maps/ChapaiGen2",
+    location: "https://www.google.com/maps/search/?api=1&query=Chapai+Nawabganj+Modern+Sadar+Hospital",
     type: "Govt"
   },
   {
@@ -410,7 +410,7 @@ export const medicalData: Hospital[] = [
     district: "Chapai Nawabganj",
     upazila: "Chapai Nawabganj Sadar",
     contact: "01714-303030",
-    location: "https://goo.gl/maps/SevaChapai",
+    location: "https://www.google.com/maps/search/?api=1&query=Seva+Diagnostic+Center+Chapai+Nawabganj",
     type: "Private"
   },
   {
@@ -420,7 +420,7 @@ export const medicalData: Hospital[] = [
     district: "Chapai Nawabganj",
     upazila: "Chapai Nawabganj Sadar",
     contact: "01715-606060",
-    location: "https://goo.gl/maps/AmanaChapai",
+    location: "https://www.google.com/maps/search/?api=1&query=Amana+Hospital+Chapai+Nawabganj",
     type: "Private"
   },
   {
@@ -430,7 +430,7 @@ export const medicalData: Hospital[] = [
     district: "Chapai Nawabganj",
     upazila: "Chapai Nawabganj Sadar",
     contact: "01716-707070",
-    location: "https://goo.gl/maps/ModernClinicChapai",
+    location: "https://www.google.com/maps/search/?api=1&query=Nawabganj+Modern+Clinic+Chapai+Nawabganj",
     type: "Private"
   },
   // Sylhet
